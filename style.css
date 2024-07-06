@@ -1190,10 +1190,7 @@ nav img{
         font-weight: 700;
     }
     #page6 img {
-        position: absolute;
-        top: -23%;
-        scale: 0.3;
-        left: -135%;
+        display: none;
     }
 
     nav #ankus{
