@@ -29,9 +29,9 @@ app.post("/send-email", async (req, res) => {
     // Send mail to admin (two email addresses)
     await transporter.sendMail({
       from: user_email,
-      to: [process.env.GMAIL_USER, "ankush@digitaldadi.in"],
+      to: [process.env.GMAIL_USER, ""],
       replyTo: user_email, // <- this is what you want
-      subject: "New Contact Form Submission From AU Website",
+      subject: "Thank You for Reaching Out!",
       html: `
         <h3>New Message From AU Website</h3>
         <p><strong>Name:</strong> ${user_name}</p>
@@ -45,7 +45,7 @@ app.post("/send-email", async (req, res) => {
     await transporter.sendMail({
       from: process.env.GMAIL_USER,
       to: user_email,
-      subject: "Thank you for contacting us!",
+      subject: "Thank You for Reaching Out!",
       html: `
         <h3>Hello ${user_name},</h3>
         <p>Thank you for reaching out through my portfolio. I’ve received your message and will get back to you as soon as possible.</p>
