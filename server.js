@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // POST route to handle form
 app.post("/send-email", async (req, res) => {
-  const { user_name, user_email, message } = req.body;
+  const { user_name, user_email, message, phone, subject } = req.body;
 
   try {
     let transporter = nodemailer.createTransport({
@@ -26,14 +26,14 @@ app.post("/send-email", async (req, res) => {
       },
     });
 
-    // Send mail to admin (two email addresses)
+
     await transporter.sendMail({
-      from: user_email,
-      to: [process.env.GMAIL_USER, ""],
+      from: process.env.SENDING_MAIL,
+      to: process.env.SENDING_MAIL,
       replyTo: user_email, // <- this is what you want
-      subject: "Thank You for Reaching Out!",
+      subject: "New Contact Form Submission From Your Portfolio Website",
       html: `
-        <h3>New Message From AU Website</h3>
+       <h3>New Message From Your Portfolio Website</h3>
         <p><strong>Name:</strong> ${user_name}</p>
         <p><strong>Email:</strong> ${user_email}</p>
         <p><strong>Message:</strong> ${message}</p>
@@ -43,13 +43,14 @@ app.post("/send-email", async (req, res) => {
 
     // Send confirmation mail to user
     await transporter.sendMail({
-      from: process.env.GMAIL_USER,
+      from:process.env.SENDING_MAIL,
       to: user_email,
-      subject: "Thank You for Reaching Out!",
+      subject: "Thank you for reaching out!",
       html: `
-        <h3>Hello ${user_name},</h3>
+          <h3>Hello ${user_name},</h3>
         <p>Thank you for reaching out through my portfolio. I’ve received your message and will get back to you as soon as possible.</p>
         <p>Best regards,<br>Ankush Raj Singh <br>MERN Stack Developer </p>
+
       `,
     });
 
