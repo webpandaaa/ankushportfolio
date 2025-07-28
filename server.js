@@ -41,7 +41,7 @@ app.post("/send-email", async (req, res) => {
     });
     
 
-    // Send confirmation mail to user
+    // Send confirmation mail to use
     await transporter.sendMail({
       from:process.env.SENDING_MAIL,
       to: user_email,
